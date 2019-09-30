@@ -127,16 +127,26 @@ export class SingleMirror {
 }
 
 class ChangingColorOr {
-    changeCount = 10
     _COUNT = 10
-
+    changeCount: number
+    intChange: number
+    constructor() {
+        this.changeCount = this._COUNT
+        this.intChange = this._COUNT
+    }
     update(dt: number) {
         this.changeCount -= dt
+        if (this.intChange > this.changeCount) {
+            MessaageCount.value = this.intChange.toString()
+            this.intChange -= 1
+        }
 
         if (this.changeCount < 0) {
+            this.changeCount = this._COUNT
+            this.intChange = this._COUNT
+
             let baseMirror = masterMap.getBaseMirrorMap()
             log("changing direction and color", baseMirror.length)
-            this.changeCount = this._COUNT
             
             for (let x = 0; x < baseMirror.length; x++) {
                 let nColor = colorList[getRandomInt(0, 2)]
@@ -165,7 +175,7 @@ export const masterMap = (function () {
                 let randomOrientation = orientationList[getRandomInt(0, 5)]
                 baseMirrorMap.push(
                     new SingleMirror(
-                        new Vector3(x * 10 + 6, y * 10 + 4, z * 10 + 6),
+                        new Vector3(x * 10 + 6, 6, z * 10 + 6),
                         randomOrientation,
                         colorList[nColor]
                     ))
