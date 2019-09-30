@@ -146,7 +146,7 @@ class ChangingColorOr {
             this.intChange = this._COUNT
 
             let baseMirror = masterMap.getBaseMirrorMap()
-            log("changing direction and color", baseMirror.length)
+            //log("changing direction and color", baseMirror.length)
             
             for (let x = 0; x < baseMirror.length; x++) {
                 let nColor = colorList[getRandomInt(0, 2)]
@@ -196,7 +196,7 @@ export const masterMap = (function () {
             monsterMap[index] = parent
         },
         combineMap(...args) {
-            log(masterMap.getBaseMirrorMap().length)
+            //log(masterMap.getBaseMirrorMap().length)
             let combineMap = []
             for (let arg of args) {
                 for (let mirror of arg) {
@@ -210,13 +210,14 @@ export const masterMap = (function () {
 
 let allMap: SingleMirror[] = []
 allMap = masterMap.combineMap(masterMap.getBaseMirrorMap(), masterMap.getUserMirrorMap())
-log(allMap.length)
+//log(allMap.length)
 for (let mirror of allMap) {
-    log(mirror.position, mirror.orientation)
+    //log(mirror.position, mirror.orientation)
 }
 
 
 // TEST
+/*
 let testmirror = allMap[0]
 log(testmirror)
 log("y- > " + testmirror.getDirectionAfterReflection(new Vector3(0, -1, 0)))
@@ -225,5 +226,6 @@ log("x- > " + testmirror.getDirectionAfterReflection(new Vector3(-1, 0, 0)))
 log("x+ > " + testmirror.getDirectionAfterReflection(new Vector3(1, 0, 0)))
 log("z- > " + testmirror.getDirectionAfterReflection(new Vector3(0, 0, -1)))
 log("z+ > " + testmirror.getDirectionAfterReflection(new Vector3(0, 0, 1)))
+*/
 
 

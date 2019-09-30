@@ -41,7 +41,7 @@ export class SingleMonster {
         engine.addEntity(this.entity)
         this.transform = this.entity.getComponent(Transform)
         this.position = this.transform.position
-        log("MONSTER ADDED TO ENGINE")
+        //log("MONSTER ADDED TO ENGINE")
         engine.addSystem(this)
         
         //ADD TO MAP
@@ -65,16 +65,18 @@ export class SingleMonster {
     setTargetPos(targetPos: Vector3) {
         this.targetPos = targetPos
 
-        log("UPDATE MAP")
+        //log("UPDATE MAP")
         let allMap = masterMap.combineMap(
             masterMap.getBaseMirrorMap(),
             masterMap.getUserMirrorMap(),
             masterMap.getMonsterMap()
         )
-        log("length: ", allMap.length)
+        //log("length: ", allMap.length)
+        /*
         for (let mirror of allMap) {
             log(mirror.entity.getComponent(Transform).position)
         }
+        */
     }
     getModelFromColor(color: string) {
         if (color === "blue") {
@@ -170,24 +172,24 @@ export class MonsterSystem {
                 rPos.copyFrom(currentPos)
                 let axisMove = getRandomInt(0, 2)
                 if (axisMove === 0) { //X-AXIS
-                    log("current POS x", currentPos)
+                    //log("current POS x", currentPos)
                     let movement = getRandomInt(2, 20)
                     rPos.x = movement
                 }
                 else if (axisMove === 1) { //Y-AXIS
-                    log("current POS y", currentPos)
+                    //log("current POS y", currentPos)
                     let movement = getRandomInt(2, 10)
                     rPos.y = movement
                 }
                 else if (axisMove === 2) { //Z-AXIS
-                    log("current POS z", currentPos)
+                    //log("current POS z", currentPos)
                     let movement = getRandomInt(2, 20)
                     rPos.z = movement
                 }
                 rPos = posToGrid(rPos)
-                log("result", rPos)
+                //log("result", rPos)
                 if (checkPointP(rPos)) {
-					log("FINAL POSITION: ", rPos)
+					//log("FINAL POSITION: ", rPos)
                     return rPos
                 }
             }
@@ -199,7 +201,7 @@ export class MonsterSystem {
 			//MOVEMENT
             if (this.monsters[i].isAlive) {
                 if (this.monsters[i].countMove <= 0 && this.monsters[i].finishMove) {
-                    log("moving now")
+                    //log("moving now")
                     this.monsters[i].setTargetPos(this.getRandomPosition(i, ""))
                 }
             }
@@ -216,7 +218,7 @@ export class MonsterSystem {
                     log("COLOR COMPARE: ", laser.color,
                         this.monsters[i].color)
 
-                    log(monsters[i])
+                    //log(monsters[i])
                     //log("MONSTER IS HIT")
                     if (laser.color === this.monsters[i].color) {
                         if (MonsterSystem.validHit) {
@@ -231,8 +233,8 @@ export class MonsterSystem {
                     this.monsters[i].deact()
                     this.monsterCount -= dt
                     setTimeout(() => {
-                        log("WAIT 10 SECOND")
-                        log("DEPLOY MONSTER")
+                        //log("WAIT 10 SECOND")
+                        //log("DEPLOY MONSTER")
                         let nColor = getRandomInt(0, 2)
                         this.monsters[i] = new SingleMonster(colorList[nColor], i)
                         let target = this.getRandomPosition(i, "init")
@@ -272,26 +274,6 @@ function checkInsideRangeRadius(
     return true
 }
 
-function checkPoint(pos: Vector3) {
-    let allMap = []
-    allMap = masterMap.combineMap(
-        masterMap.getBaseMirrorMap(),
-        masterMap.getUserMirrorMap(),
-        masterMap.getMonsterMap()
-    )
-    log(allMap.length)
-
-    for (let mirror of allMap) {
-        let p = mirror.entity.getComponent(Transform).position
-        if (p.x === pos.x &&
-            p.y === pos.y &&
-            p.z === pos.z
-        ) {
-            return false
-        }
-    }
-    return true
-}
 function checkPointP(pos: Vector3) {
     let allMap = []
     allMap = masterMap.combineMap(
@@ -299,7 +281,7 @@ function checkPointP(pos: Vector3) {
         masterMap.getUserMirrorMap(),
         masterMap.getMonsterMap()
     )
-    log(allMap.length)
+    //log(allMap.length)
 
     for (let mirror of allMap) {
         let p = mirror.entity.getComponent(Transform).position
@@ -309,7 +291,6 @@ function checkPointP(pos: Vector3) {
         if (p.y === pos.y) return false
         if (p.z === pos.z) return false
 		*/
-	
     }
     return true
 }

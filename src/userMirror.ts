@@ -93,10 +93,10 @@ class UserMirror extends SingleMirror {
             this._doRotation()
         }
         else {
-            log("end of array, remove entity")
+            //log("end of array, remove entity")
             this.toRemove()
             this.startNew(this.id)
-            log(this.position, this.isActive, this.isReady)
+            //log(this.position, this.isActive, this.isReady)
         }
     }
     static checkDuplicatePos(position: Vector3) {
@@ -153,7 +153,7 @@ class UserMirror extends SingleMirror {
         if (this.isHit === 2) {
             clearTimeout(timeoutVar[this.id])
             this.toRemove()
-            log("remove and clearing counter")
+            //log("remove and clearing counter")
         }
     }
 }
@@ -194,25 +194,25 @@ class MirrorPoint {
             curEnt.getComponent(Transform).position.y = x * 2 + 2
             curEnt.addComponent(new OnClick(e => {
 
-                log("POINT CLICKED")
+                //log("POINT CLICKED")
                 let pos = Vector3.Zero()
                 pos.copyFrom(this.ent[x].getComponent(Transform).position)
-                log(pos)
+                //log(pos)
                 let dupId = UserMirror.checkDuplicatePos(pos)
                 if (dupId !== -1) {
                     if (userMirror[dupId].isActive === false) {
                         let idxSearch = orientationList.indexOf(userMirror[dupId].orientation)
 
-                        log("mirror duplicate at", dupId, "with orientation", idxSearch)
+                        //log("mirror duplicate at", dupId, "with orientation", idxSearch)
 
                         userMirror[dupId].setOrientation(orientationList[idxSearch + 1])
                     }
-                    else log("can't change direction when mirror is active")
+                    //else log("can't change direction when mirror is active")
                 }
                 else {
                     let index = UserMirror.getIndexUserMirror()
-                    log("mirror not duplicate")
-                    log("get index at", index)
+                    //log("mirror not duplicate")
+                    //log("get index at", index)
                     if(index !== -1) userMirror[index].act(pos)
                 }
             }))
@@ -250,12 +250,12 @@ class userTileMark {
         }))
         this.entity.addComponent(
             new OnClick(e => {
-                log(this.entity.getComponent(Transform).position, mirrorPoints[MirrorPoint.index].parEnt.getComponent(Transform).position)
+                //log(this.entity.getComponent(Transform).position, mirrorPoints[MirrorPoint.index].parEnt.getComponent(Transform).position)
                 mirrorPoints[MirrorPoint.index].act(this.entity.getComponent(Transform).position)
                 for (let i = 0; i < 3; i++)
                     mirrorPoints[i].parEnt.getComponent(Transform).scale.setAll(1)
                 toggleShow = 1
-                log("TILE CLICKED", this.entity.getComponent(Transform).position, MirrorPoint.index)
+                //log("TILE CLICKED", this.entity.getComponent(Transform).position, MirrorPoint.index)
                 MirrorPoint.index += 1
                 if (MirrorPoint.index === 3) {
                     MirrorPoint.index = 0
@@ -300,13 +300,13 @@ const tileMark = new userTileMark()
 const input = Input.instance
 
 input.subscribe("BUTTON_DOWN", ActionButton.PRIMARY, false, e => {
-    log("pointer Up", e)
+    //log("pointer Up", e)
     for (let i = 0; i < 3; i++) {
-        log("i: ", userMirror[i].isActive, userMirror[i].isReady)
+        //log("i: ", userMirror[i].isActive, userMirror[i].isReady)
         if (userMirror[i].isReady) {
             userMirror[i].toActive()
             timeoutVar[i] = setTimeout(() => {
-                log("30 sec passed", i, userMirror[i])
+                //log("30 sec passed", i, userMirror[i])
                 if (userMirror[i].isActive && !userMirror[i].isReady) {
                     if (userMirror[i].isHit === 0) {
                         userMirror[i].toRemove()
@@ -319,7 +319,7 @@ input.subscribe("BUTTON_DOWN", ActionButton.PRIMARY, false, e => {
 
 export let toggleShow = 1
 input.subscribe("BUTTON_DOWN", ActionButton.SECONDARY, false, e => {
-    log("pointer Up", e)
+    //log("pointer Up", e)
     toggleShow += 1
     for (let i = 0; i < 3; i++) {
         mirrorPoints[i].parEnt.getComponent(Transform).scale.setAll(toggleShow % 2)
@@ -364,7 +364,7 @@ function checkPoint(pos: Vector3) {
         masterMap.getUserMirrorMap(),
         masterMap.getMonsterMap()
     )
-    log(allMap.length)
+    //log(allMap.length)
 
     for (let mirror of allMap) {
         let p = mirror.entity.getComponent(Transform).position
