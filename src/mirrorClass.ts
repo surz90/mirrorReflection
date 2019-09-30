@@ -127,7 +127,7 @@ export class SingleMirror {
 }
 
 class ChangingColorOr {
-    _COUNT = 10
+    _COUNT = 120
     changeCount: number
     intChange: number
     constructor() {

@@ -69,10 +69,10 @@ class OpenTheGate {
         let roboTransform = robo.getComponent(Transform)
 
         if (doorLerp.lerpFraction < 1) {
-            doorLerp.lerpFraction += dt * 2
-            doorTransform.translate(Vector3.Down().scale(0.6))
-            roboTransform.translate(Vector3.Up().scale(0.2))
-            roboTransform.rotate(Vector3.Up(), dt * 2 * 360)
+            doorLerp.lerpFraction += 0.04
+            doorTransform.translate(Vector3.Down().scale(0.4))
+            roboTransform.translate(Vector3.Up().scale(0.1))
+            roboTransform.rotate(Vector3.Up(), 0.04 * 360)
         }
         else {
             doorLerp.lerpFraction = 1
@@ -89,10 +89,10 @@ class CloseTheGate {
         let roboTransform = robo.getComponent(Transform)
 
         if (doorLerp.lerpFraction > 0) {
-            doorLerp.lerpFraction -= dt * 2
-            doorTransform.translate(Vector3.Up().scale(0.6))
-            roboTransform.translate(Vector3.Down().scale(0.2))
-            roboTransform.rotate(Vector3.Down(), dt * 2 * 360)
+            doorLerp.lerpFraction -= 0.04
+            doorTransform.translate(Vector3.Up().scale(0.4))
+            roboTransform.translate(Vector3.Down().scale(0.1))
+            roboTransform.rotate(Vector3.Down(), 0.04 * 360)
         }
         else {
             doorLerp.lerpFraction = 0
@@ -108,8 +108,8 @@ class OpenTheGateExit {
         let doorTransform = door.getComponent(Transform)
 
         if (doorLerp.lerpFraction < 1) {
-            doorLerp.lerpFraction += dt * 2
-            doorTransform.translate(Vector3.Down().scale(0.6))
+            doorLerp.lerpFraction += 0.04
+            doorTransform.translate(Vector3.Down().scale(0.4))
         }
         else {
             doorLerp.lerpFraction = 1
@@ -124,8 +124,8 @@ class CloseTheGateExit {
         let doorTransform = door.getComponent(Transform)
 
         if (doorLerp.lerpFraction > 0) {
-            doorLerp.lerpFraction -= dt * 2
-            doorTransform.translate(Vector3.Up().scale(0.6))
+            doorLerp.lerpFraction -= 0.04
+            doorTransform.translate(Vector3.Up().scale(0.4))
         }
         else {
             doorLerp.lerpFraction = 0
